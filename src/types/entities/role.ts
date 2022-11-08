@@ -1,5 +1,3 @@
-interface Role {
-  roleName: string;
-}
+type Role = "user" | "admin";
 
 export default Role;

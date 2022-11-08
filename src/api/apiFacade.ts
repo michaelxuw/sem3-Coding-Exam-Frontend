@@ -10,13 +10,22 @@ function handleHttpErrors(res: Response) {
 
 function apiFacade() {
   const setToken = (token: string) => {
-    localStorage.setItem("jwtToken", token);
+    sessionStorage.setItem("jwtToken", token);
   };
 
   const getToken = () => {
-    const value = localStorage.getItem("jwtToken");
+    const value = sessionStorage.getItem("jwtToken");
     if (value == null) return undefined;
     return value;
+  };
+
+  const validateToken = async () => {
+    const token = getToken();
+    if (!token) return false;
+
+    const options = makeOptions("HEAD", true);
+    const res = await fetch(`${BASE_API_URL}/login/validate`, options);
+    return res.ok;
   };
 
   const loggedIn = () => {
@@ -24,7 +33,7 @@ function apiFacade() {
   };
 
   const logout = () => {
-    localStorage.removeItem("jwtToken");
+    sessionStorage.removeItem("jwtToken");
   };
 
   const login = (user: string, password: string) => {
@@ -69,12 +78,6 @@ function apiFacade() {
     return opts;
   }
 
-  const getJokes = async () => {
-    const response = await fetch(`${URL}/api/jokes`);
-    const jokes = await response.json();
-    return jokes;
-  };
-
   return {
     makeOptions,
     setToken,
@@ -83,7 +86,7 @@ function apiFacade() {
     login,
     logout,
     fetchData,
-    getJokes,
+    validateToken,
   };
 }
 
