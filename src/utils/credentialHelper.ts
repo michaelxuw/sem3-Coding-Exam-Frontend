@@ -23,8 +23,13 @@ function validateRoles(allowedRoles: Role[]) {
   return false;
 }
 
+function getUsername() {
+  const jwtData = decodeJwt();
+  return jwtData && jwtData.username;
+}
 
 export {
   decodeJwt,
-  validateRoles
+  validateRoles,
+  getUsername
 };
