@@ -6,7 +6,7 @@ import "./assets/css/main.css";
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
 	<React.StrictMode>
-		<BrowserRouter>
+		<BrowserRouter basename="react-frontend">
 			<App />
 		</BrowserRouter>
 	</React.StrictMode>
