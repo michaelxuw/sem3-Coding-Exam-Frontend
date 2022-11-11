@@ -1,11 +1,12 @@
 import { BASE_API_URL } from "../../settings";
+import WeatherNCat from "../types/entities/weatherNCat";
 
 
 function handleHttpErrors(res: Response) {
   if (!res.ok) {
-    return Promise.reject({ status: res.status, fullError: res.json() });
+    return Promise.reject<{ status: string, fullError: {}; }>({ status: res.status, fullError: res.json() });
   }
-  return res.json();
+  return Promise.resolve(res.json() as { [key: string]: any; });
 }
 
 
@@ -30,7 +31,7 @@ function apiFacade() {
   };
 
   const loggedIn = () => {
-    return getToken() != null;
+    return getToken() != undefined;
   };
 
   const logout = () => {
@@ -44,11 +45,6 @@ function apiFacade() {
       .then(res => {
         setToken(res.token);
       });
-  };
-
-  const fetchData = () => {
-    const options = makeOptions("GET", true);
-    return fetch(BASE_API_URL + "/info/user", options).then(handleHttpErrors);
   };
 
   function makeOptions<T>(method: string, addToken: boolean, body?: T) {
@@ -79,6 +75,28 @@ function apiFacade() {
     return opts;
   }
 
+
+  const fetchUserGreeting = async () => {
+    const options = makeOptions("GET", true);
+    const res = await fetch(BASE_API_URL + "/info/user", options);
+    const data = await handleHttpErrors(res);
+    return data.msg;
+  };
+
+  const fetchAdminGreeting = async () => {
+    const options = makeOptions("GET", true);
+    const res = await fetch(BASE_API_URL + "/info/admin", options);
+    const data = await handleHttpErrors(res);
+    return data.msg;
+  };
+
+  const fetchWeatherNCat = async (): Promise<WeatherNCat> => {
+    const options = makeOptions("GET", true);
+    const res = await fetch(BASE_API_URL + "/weatherNcat", options);
+    const data = await handleHttpErrors(res);
+    return data as WeatherNCat;
+  };
+
   return {
     makeOptions,
     setToken,
@@ -86,7 +104,9 @@ function apiFacade() {
     loggedIn,
     login,
     logout,
-    fetchData,
+    fetchUserGreeting,
+    fetchAdminGreeting,
+    fetchWeatherNCat,
     validateToken,
   };
 }

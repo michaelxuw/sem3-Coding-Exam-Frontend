@@ -17,8 +17,7 @@ function Header({ setErrorMsg }: HeaderProps) {
 		<nav className="w-full flex bg-gray-600 h-[50px] gap-2">
 			<NavItem route={"/"} icon={"home"} label={"Home"} end />
 			<NavItem allowedRoles={["admin"]} route={"/persons"} icon={"users"} label={"Persons"} />
-			<NavItem route={"/search"} icon={"search"} label={"Search"} />
-			<NavItem route={"/contact"} icon={"envelope"} label={"Contact"} />
+			<NavItem route={"/example-page"} icon={"book"} label={"Example"} />
 
 			<div className="ml-auto flex items-center justify-center">
 				{!state.loggedIn ? (
