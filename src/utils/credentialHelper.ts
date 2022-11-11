@@ -11,25 +11,23 @@ function decodeJwt() {
   return decodedJwtData;
 }
 
-function validateRoles(allowedRoles: Role[]) {
-  const jwtData = decodeJwt();
-  if (!jwtData || !jwtData.roles) return false;
-
-  const roles = jwtData.roles.split(",") as Role[];
-  for (const role of roles) {
-    if (allowedRoles.includes(role)) return true;
-  }
-
-  return false;
+function getUsername(jwt: {username: string}) {
+  return jwt && jwt.username;
 }
 
-function getUsername() {
+function getUserRoles(jwt: {roles: string}) {
+  if (!jwt || !jwt.roles) return false;
+  return jwt.roles.split(",") as Role[];
+}
+
+function getUserInfo() {
   const jwtData = decodeJwt();
-  return jwtData && jwtData.username;
+  return {
+    username: getUsername(jwtData),
+    roles: getUserRoles(jwtData) || []
+  };
 }
 
 export {
-  decodeJwt,
-  validateRoles,
-  getUsername
+  getUserInfo
 };

@@ -1,14 +1,5 @@
-import React, {
-	ChangeEvent,
-	Dispatch,
-	FormEvent,
-	SetStateAction,
-	useContext,
-	useRef,
-	useState,
-} from "react";
-import facade from "../api/apiFacade.js";
-import AuthContext from "../stores/AuthContext.js";
+import { ChangeEvent, FormEvent, useState } from "react";
+import { useAuth } from "../stores/AuthContext.js";
 import Button from "./Button.js";
 import InputField from "./InputField.js";
 
@@ -19,15 +10,11 @@ interface LoginProps {
 function Login({ setErrorMsg }: LoginProps) {
 	const init = { username: "", password: "" };
 	const [loginCredentials, setLoginCredentials] = useState(init);
-	const { setLoggedIn } = useContext(AuthContext);
+	const { login } = useAuth();
 
 	const performLogin = (evt: FormEvent<HTMLFormElement>) => {
 		evt.preventDefault();
 		login(loginCredentials.username, loginCredentials.password);
-	};
-
-	const login = (user: string, pass: string) => {
-		facade.login(user, pass).then(res => setLoggedIn && setLoggedIn(true));
 	};
 
 	const onChange = (evt: ChangeEvent<HTMLInputElement>) => {

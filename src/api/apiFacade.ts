@@ -8,6 +8,7 @@ function handleHttpErrors(res: Response) {
   return res.json();
 }
 
+
 function apiFacade() {
   const setToken = (token: string) => {
     sessionStorage.setItem("jwtToken", token);
