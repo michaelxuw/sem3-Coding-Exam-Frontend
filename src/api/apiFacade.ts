@@ -97,6 +97,14 @@ function apiFacade() {
     return data as WeatherNCat;
   };
 
+  const fetchImageFromApiURL = async (url: string): Promise<string> => {
+    const options = makeOptions("POST", true, {url: url});
+    const res = await fetch(BASE_API_URL + "/imagesFromApis", options);
+    const data = await handleHttpErrors(res);
+    return data as unknown as string;
+  };
+
+
   return {
     makeOptions,
     setToken,
@@ -107,6 +115,7 @@ function apiFacade() {
     fetchUserGreeting,
     fetchAdminGreeting,
     fetchWeatherNCat,
+    fetchImageFromApiURL,
     validateToken,
   };
 }
