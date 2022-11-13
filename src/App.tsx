@@ -1,40 +1,30 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
-import facade from "./api/apiFacade";
 import GuardedRoute from "./components/GuardedRoute";
 import Header from "./components/Header";
+import ExamplePage from "./pages/examplepage";
 import Home from "./pages/Home";
 import User from "./pages/User";
-import AuthContext from "./stores/AuthContext";
+import { AuthProvider, useAuth } from "./stores/AuthContext";
 
 function App() {
-	const [loggedIn, setLoggedIn] = useState(false);
+	const { autoLogin } = useAuth();
 
 	useEffect(() => {
-		if (!facade.validateToken()) facade.logout();
-		if (facade.getToken()) setLoggedIn(true);
+		autoLogin();
 	}, []);
-
-	const contextValue = useMemo(
-		() => ({
-			setLoggedIn,
-			loggedIn,
-		}),
-		[setLoggedIn, loggedIn]
-	);
 
 	return (
 		<>
-			<AuthContext.Provider value={contextValue}>
-				<Header />
-				<Routes>
-					<Route path="/" element={<Home />} />
-					<Route path="/persons" element={<GuardedRoute allowedRoles={["admin"]} />}>
-						<Route index element={<User />} />
-					</Route>
-					<Route path="*" element={<h1>404 Page Not Found !!!!</h1>} />
-				</Routes>
-			</AuthContext.Provider>
+			<Header />
+			<Routes>
+				<Route path="/" element={<Home />} />
+				<Route path="/persons" element={<GuardedRoute allowedRoles={["admin"]} />}>
+					<Route index element={<User />} />
+				</Route>
+				<Route path="/example-page" element={<ExamplePage />} />
+				<Route path="*" element={<h1>404 Page Not Found !!!!</h1>} />
+			</Routes>
 		</>
 	);
 }

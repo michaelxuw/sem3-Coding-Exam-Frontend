@@ -1,31 +1,23 @@
-import React from "react";
-import {locationOptions} from "../stores/DropdownListItemTemplate";
-import Dropdown from "../components/Dropdown";
-import Button from "../components/Button";
+import React, { useEffect, useState } from "react";
+import facade from "../api/apiFacade";
+import { useAuth } from "../stores/AuthContext";
 
 function Home() {
-	let locations = locationOptions;
-	const logOnClick = () => {
-		locations.forEach((location) => {
-			console.log(location)})
-	}
+	const { state: authState } = useAuth();
+	const [greeting, setGreeting] = useState("");
 
-	return <div>
-		HOME
+	useEffect(() => {
+		const getGreeting = async () => {
+			let newGreeting = "Welcome!";
+			if (authState.roles.includes("admin")) newGreeting = await facade.fetchAdminGreeting();
+			else if (authState.roles.includes("user"))
+				newGreeting = await facade.fetchUserGreeting();
+			setGreeting(newGreeting);
+		};
+		getGreeting();
+	}, [authState.loggedIn]);
 
-
-		<br/><br/><br/><br/><br/>
-		<Button onClick={logOnClick}/>
-		<p>locationOptions</p>
-		<Dropdown title="Select location" options={locations}/>
-		<br/><br/>
-		<p>locationOptions multi</p>
-		<Dropdown title="Select locations" isMulti={true} titleHelper="location"
-				  titleHelperPlural="locations" options={locations}/>
-		<br/><br/>
-
-
-	</div>;
+	return <div>{greeting}</div>;
 }
 
 export default Home;
