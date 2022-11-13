@@ -19,18 +19,24 @@ function ImagesFromApisPage() {
 	}
 
 	return (
-		<div className="flex flex-col justify-center items-center gap-3">
-			<h2 className="text-2xl font-extrabold">Get images from apis that returns JSON with url to an image</h2>
-			<Dropdown title="Image" options={imageUrls}/>
-			<div className="flex flex-col justify-center items-center gap-3">
-				<Button onClick={onClick}/>
+		<>
+			<div className="container flex items-center gap-3 m-2">
+				<div className="flex w-1/2 float-left justify-center items-center gap-3 m-2">
+					<h2 className="text-2xl font-extrabold">Get images from apis that returns JSON with url to an image</h2>
+				</div>
+				<div className="flex mt-2 gap-3">
+					<Dropdown title="Image" options={imageUrls} className="w-max w-[350px] relative"/>
+					<Button onClick={onClick} children="Get image" className="w-max"/>
+				</div>
 			</div>
-			{!data ? (
-				<LoadingSpinner />
-			) : (
-				<img className="rounded-lg" height={"100px"} width={"200px"} src={data} />
-			)}
-		</div>
+			<div className="flex m-2 float-right justify-center w-1/2">
+				{!data ? (
+					<LoadingSpinner />
+				) : (
+					<img className="rounded-lg" height={"300px"} width={"300px"} src={data} />
+				)}
+			</div>
+		</>
 	);
 }
 

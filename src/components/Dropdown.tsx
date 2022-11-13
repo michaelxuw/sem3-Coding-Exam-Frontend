@@ -7,9 +7,10 @@ interface DropdownProps{
     titleHelper?: string;
     titleHelperPlural?: string;
     options: DropdownOptionBasics[];
+    className?: string;
 }
 
-const Dropdown = ({ title, options, isMulti, titleHelper, titleHelperPlural }: DropdownProps) => {
+const Dropdown = ({ title, options, isMulti, titleHelper, titleHelperPlural, className }: DropdownProps) => {
     isMulti = isMulti ?? false;
     titleHelper = titleHelper ?? "";
     titleHelperPlural = titleHelperPlural ?? "";
@@ -51,7 +52,7 @@ const Dropdown = ({ title, options, isMulti, titleHelper, titleHelperPlural }: D
 
 
     return (
-        <div className={`relative w-[250px] text-lg select-none`} ref={ref}>
+        <div className={`${className} text-lg select-none`} ref={ref}>
             <button type="button" className={`flex items-center justify-between relative 
             border-2 border-solid w-full border-blue-400 rounded-sm 
             leading-9 cursor-default cursor-pointer`} onClick={toggleList}>
