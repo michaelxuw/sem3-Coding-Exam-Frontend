@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
 import GuardedRoute from "./components/GuardedRoute";
 import Header from "./components/Header";
-import ExamplePage from "./pages/examplepage";
+import ExamplePage from "./pages/ExamplePage";
 import Home from "./pages/Home";
 import User from "./pages/User";
 import { AuthProvider, useAuth } from "./stores/AuthContext";

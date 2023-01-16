@@ -27,17 +27,12 @@ function Header({ setErrorMsg }: HeaderProps) {
 						<div>
 							<p className="text-white px-4">
 								{"Name: " +
-									state.username.charAt(0).toUpperCase() +
-									state.username.substring(1)}
+									state.email.charAt(0).toUpperCase() +
+									state.email.substring(1)}
 							</p>
 							<p className="text-white px-4">
 								{"Roles: " +
-									state.roles.map(
-										(r, i) =>
-											(i > 0 ? " " : "") +
-											r.charAt(0).toUpperCase() +
-											r.substring(1)
-									)}
+									state.pms}
 							</p>
 						</div>
 						<LoggedIn />
