@@ -7,7 +7,7 @@ function Home() {
 
 	useEffect(() => {
 		const getGreeting = async () => {
-			let newGreeting = "Welcome!";
+			let newGreeting = "Welcome! \nFestival is all done";
 			setGreeting(newGreeting);
 		};
 		getGreeting();

@@ -13,6 +13,8 @@ function getFestivalAPI() {
       const options = makeOptions("GET", true);
       const res = await fetch(`${base_endpoint}/get`, options);
       const data = await handleHttpErrors(res);
+      const temp = data as newFestival[];
+      console.log(temp)
       return data as newFestival[];
     } catch (error: any) {
       return Promise.reject({ ...error });
@@ -30,12 +32,43 @@ function getFestivalAPI() {
   };
 
   const createFestival = async ({...props}: newFestival) => {
-    const options = makeOptions("POST", true, {...props});
-    const res = await fetch(`${base_endpoint}/new`, options);
-    const data = await handleHttpErrors(res);
-    return data;
+    try {
+      const options = makeOptions("POST", true, {...props});
+      const res = await fetch(`${base_endpoint}/new`, options);
+      console.log(res)
+      const data = await handleHttpErrors(res);
+      return data;
+    } catch (error: any) {
+      return Promise.reject({ ...error });
+    }
   }
 
+  const updateFestival = async (id: number, {...props}: newFestival) => {
+    console.log(props)
+    try {
+      const options = makeOptions("PUT", true, {...props});
+      console.log("before fetch")
+      const res = await fetch(`${base_endpoint}/${id}`, options);
+      console.log("after fetch")
+      console.log(res)
+      const data = await handleHttpErrors(res);
+      return data;
+    } catch (error: any) {
+      return Promise.reject({ ...error });
+    }
+  }
+
+  const deleteFestival = async (id: number) => {
+    console.log("deleting: "+id)
+    try {
+      const options = makeOptions("DELETE", true);
+      const res = await fetch(`${base_endpoint}/${id}`, options);
+      console.log("after res in deleteFestival")
+      await handleHttpErrors(res);
+    } catch (error: any) {
+      return Promise.reject({ ...error });
+    }
+  }
 
 
 
@@ -43,6 +76,8 @@ function getFestivalAPI() {
     fetchFestivals,
     fetchRelevantFestivals,
     createFestival,
+    updateFestival,
+    deleteFestival,
   };
 }
 

@@ -18,7 +18,7 @@ function App() {
 		<>
 			<Header />
 			<Routes>
-				<Route path="/sem3-coding-exam-frontend" element={<Home />} />
+				<Route path="/" element={<Home />} />
 				<Route path="/adminFestivals" element={<GuardedRoute permissionRequired={"ADMIN"} />}>
 					<Route index element={<AdminFestivals />} />
 				</Route>

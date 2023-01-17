@@ -1,14 +1,9 @@
 import React, { useEffect, useMemo, useState } from "react";
 import API from "@/api";
 import newFestival from "@/types/entities/newFestival";
-import Button from "@/components/Button";
-import useToggle from "@/hooks/useToggle";
-import Modal from "@/components/Modal";
-import CreateFestival from "@/pages/CreateFestival";
 
 function AdminFestivals() {
 	const [festivals, setFestivals] = useState<newFestival[]>([]);
-	const [show, toggle] = useToggle({});
 
 	const load = async () => {
 		const data = await API.festival.fetchRelevantFestivals();
@@ -18,10 +13,6 @@ function AdminFestivals() {
 		load();
 	}, []);
 
-	const afterSubmit = () => {
-		toggle();
-		load();
-	}
 
 	return (
 		<div className="flex flex-col gap-6 h-full p-8">
