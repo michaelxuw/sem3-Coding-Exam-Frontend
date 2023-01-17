@@ -2,10 +2,10 @@ import { useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
 import GuardedRoute from "./components/GuardedRoute";
 import Header from "./components/Header";
-import ExamplePage from "./pages/ExamplePage";
 import Home from "./pages/Home";
-import User from "./pages/User";
-import { AuthProvider, useAuth } from "./stores/AuthContext";
+import { AuthProvider, useAuth } from "./hooks/AuthContext";
+import AdminFestivals from "@/pages/AdminFestivals";
+import GuestFestivals from "@/pages/GuestFestivals";
 
 function App() {
 	const { autoLogin } = useAuth();
@@ -18,11 +18,13 @@ function App() {
 		<>
 			<Header />
 			<Routes>
-				<Route path="/" element={<Home />} />
-				<Route path="/persons" element={<GuardedRoute allowedRoles={["admin"]} />}>
-					<Route index element={<User />} />
+				<Route path="/sem3-coding-exam-frontend" element={<Home />} />
+				<Route path="/adminFestivals" element={<GuardedRoute permissionRequired={"ADMIN"} />}>
+					<Route index element={<AdminFestivals />} />
 				</Route>
-				<Route path="/example-page" element={<ExamplePage />} />
+				<Route path="/guestFestivals" element={<GuardedRoute permissionRequired={"USER"} />}>
+					<Route index element={<GuestFestivals />} />
+				</Route>
 				<Route path="*" element={<h1>404 Page Not Found !!!!</h1>} />
 			</Routes>
 		</>

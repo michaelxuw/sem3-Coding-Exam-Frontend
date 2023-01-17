@@ -1,6 +1,6 @@
 import React, { Dispatch, SetStateAction, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../stores/AuthContext.js";
+import { useAuth } from "../hooks/AuthContext.js";
 import Button from "./Button.js";
 
 function LoggedIn() {
@@ -8,7 +8,7 @@ function LoggedIn() {
 	const { logout } = useAuth();
 	const onLogout = () => {
 		logout();
-		navigate("/");
+		navigate("/sem3-coding-exam-frontend");
 	};
 
 	return (

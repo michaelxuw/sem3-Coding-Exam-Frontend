@@ -3,6 +3,7 @@ import { BASE_API_URL } from "../../settings";
 // import scoutAPI from "./apiFoocleScout";
 // import fSpotAPI from "./apiFoocleSpot";
 import accountAPI from "@/api/apiAccount";
+import festivalAPI from "@/api/apiFestivals";
 import { getToken, makeOptions, loggedIn } from "./util.api";
 
 
@@ -23,6 +24,7 @@ const API = {
   // business: businessAPI,
   // scout: scoutAPI,
   // spot: fSpotAPI,
+  festival: festivalAPI,
   account: accountAPI,
   helpers: {
     validateToken,

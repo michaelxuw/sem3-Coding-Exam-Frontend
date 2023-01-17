@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
-import facade from "../api/apiFacade";
-import { useAuth } from "../stores/AuthContext";
+import { useAuth } from "../hooks/AuthContext";
 
 function Home() {
 	const { state: authState } = useAuth();
@@ -9,9 +8,6 @@ function Home() {
 	useEffect(() => {
 		const getGreeting = async () => {
 			let newGreeting = "Welcome!";
-			if (authState.pms === "ADMIN") newGreeting = await facade.fetchAdminGreeting();
-			else if (authState.pms === "USER")
-				newGreeting = await facade.fetchUserGreeting();
 			setGreeting(newGreeting);
 		};
 		getGreeting();
