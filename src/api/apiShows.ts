@@ -49,7 +49,17 @@ function getShowAPI() {
     }
   };
 
-  const updateFestival = async (id: number, {...props}: newShow) => {
+  const signUpToShow = async (showId: number, guestID: number) => {
+    try {
+      const options = makeOptions("PUT", true);
+      const res = await fetch(`${base_endpoint}/${showId}/${guestID}`, options);
+      const data = await handleHttpErrors(res);
+      return data;
+    } catch (error: any) {
+      return Promise.reject({ ...error });
+    }
+  }
+  const updateShow = async (id: number, {...props}: newShow) => {
     try {
       const options = makeOptions("PUT", true, {...props});
       const res = await fetch(`${base_endpoint}/${id}`, options);
@@ -77,7 +87,8 @@ function getShowAPI() {
     fetchAllShows,
     fetchAllShowsForGuestWithID,
     fetchShowWithID,
-    updateFestival,
+    signUpToShow,
+    updateShow,
     deleteShow
   };
 }

@@ -60,7 +60,7 @@ function Home() {
 
 
 		<h2 className="text-2xl font-bold">Below is quicky messy coding for making accounts (User or Admin)</h2>
-
+		<h2 className="text-2xl font-bold">Also has no feedback after clicking create</h2>
 		<h2 className="text-2xl font-bold">Create an account:</h2>
 		<form
 			noValidate

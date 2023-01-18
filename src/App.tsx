@@ -7,6 +7,7 @@ import { AuthProvider, useAuth } from "./hooks/AuthContext";
 import AdminFestivals from "@/pages/AdminFestivals";
 import GuestFestivals from "@/pages/GuestFestivals";
 import GuestShows from "@/pages/GuestShows";
+import AdminShows from "@/pages/AdminShows";
 
 function App() {
 	const { autoLogin } = useAuth();
@@ -22,6 +23,9 @@ function App() {
 				<Route path="/sem3-coding-exam-frontend/" element={<Home />} />
 				<Route path="/sem3-coding-exam-frontend/adminFestivals" element={<GuardedRoute permissionRequired={"ADMIN"} />}>
 					<Route index element={<AdminFestivals />} />
+				</Route>
+				<Route path="/sem3-coding-exam-frontend/adminShows" element={<GuardedRoute permissionRequired={"ADMIN"} />}>
+					<Route index element={<AdminShows />} />
 				</Route>
 				<Route path="/sem3-coding-exam-frontend/guestFestivals" element={<GuardedRoute permissionRequired={"USER"} />}>
 					<Route index element={<GuestFestivals />} />
