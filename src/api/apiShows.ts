@@ -1,18 +1,16 @@
 import { BASE_API_URL } from "../../settings";
 import { handleHttpErrors, makeOptions, setToken } from "./util.api";
-import newFestival from "@/types/entities/newFestival";
+import newShow from "@/types/entities/newShow";
 
 
-function getFestivalAPI() {
+function getShowAPI() {
 
-  const base_endpoint = `${BASE_API_URL}/festival`;
+  const base_endpoint = `${BASE_API_URL}/show`;
 
-
-  const createFestival = async ({...props}: newFestival) => {
+  const createShow = async ({...props}: newShow) => {
     try {
       const options = makeOptions("POST", true, {...props});
       const res = await fetch(`${base_endpoint}/new`, options);
-      console.log(res)
       const data = await handleHttpErrors(res);
       return data;
     } catch (error: any) {
@@ -20,37 +18,41 @@ function getFestivalAPI() {
     }
   }
 
-  const fetchFestivals = async () => {
+  const fetchAllShows = async () => {
     try {
       const options = makeOptions("GET", true);
       const res = await fetch(`${base_endpoint}/get`, options);
       const data = await handleHttpErrors(res);
-      const temp = data as newFestival[];
-      console.log(temp)
-      return data as newFestival[];
+      return data as newShow[];
     } catch (error: any) {
       return Promise.reject({ ...error });
     }
   };
-  const fetchRelevantFestivals = async () => {
+  const fetchAllShowsForGuestWithID = async (id: number) => {
     try {
       const options = makeOptions("GET", true);
-      const res = await fetch(`${base_endpoint}/getRelevant`, options);
+      const res = await fetch(`${base_endpoint}/get/${id}`, options);
       const data = await handleHttpErrors(res);
-      return data as newFestival[];
+      return data as newShow[];
+    } catch (error: any) {
+      return Promise.reject({ ...error });
+    }
+  };
+  const fetchShowWithID = async (id: number) => {
+    try {
+      const options = makeOptions("GET", true);
+      const res = await fetch(`${base_endpoint}/${id}`, options);
+      const data = await handleHttpErrors(res);
+      return data as newShow[];
     } catch (error: any) {
       return Promise.reject({ ...error });
     }
   };
 
-  const updateFestival = async (id: number, {...props}: newFestival) => {
-    console.log(props)
+  const updateFestival = async (id: number, {...props}: newShow) => {
     try {
       const options = makeOptions("PUT", true, {...props});
-      console.log("before fetch")
       const res = await fetch(`${base_endpoint}/${id}`, options);
-      console.log("after fetch")
-      console.log(res)
       const data = await handleHttpErrors(res);
       return data;
     } catch (error: any) {
@@ -58,12 +60,10 @@ function getFestivalAPI() {
     }
   }
 
-  const deleteFestival = async (id: number) => {
-    console.log("deleting: "+id)
+  const deleteShow = async (id: number) => {
     try {
       const options = makeOptions("DELETE", true);
       const res = await fetch(`${base_endpoint}/${id}`, options);
-      console.log("after res in deleteFestival")
       await handleHttpErrors(res);
     } catch (error: any) {
       return Promise.reject({ ...error });
@@ -73,13 +73,14 @@ function getFestivalAPI() {
 
 
   return {
-    createFestival,
-    fetchFestivals,
-    fetchRelevantFestivals,
+    createShow,
+    fetchAllShows,
+    fetchAllShowsForGuestWithID,
+    fetchShowWithID,
     updateFestival,
-    deleteFestival,
+    deleteShow
   };
 }
 
-const festivalAPI = getFestivalAPI();
-export default festivalAPI;
+const showAPI = getShowAPI();
+export default showAPI;

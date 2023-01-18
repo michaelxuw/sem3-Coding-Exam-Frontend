@@ -8,7 +8,7 @@ function LoggedIn() {
 	const { logout } = useAuth();
 	const onLogout = () => {
 		logout();
-		navigate("/");
+		navigate("/sem3-coding-exam-frontend/");
 	};
 
 	return (

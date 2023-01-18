@@ -2,7 +2,7 @@ import React, { useEffect, useMemo, useState } from "react";
 import API from "@/api";
 import newFestival from "@/types/entities/newFestival";
 
-function AdminFestivals() {
+function GuestFestivals() {
 	const [festivals, setFestivals] = useState<newFestival[]>([]);
 
 	const load = async () => {
@@ -43,4 +43,4 @@ function AdminFestivals() {
 	);
 }
 
-export default AdminFestivals;
+export default GuestFestivals;

@@ -4,6 +4,7 @@ import { BASE_API_URL } from "../../settings";
 // import fSpotAPI from "./apiFoocleSpot";
 import accountAPI from "@/api/apiAccount";
 import festivalAPI from "@/api/apiFestivals";
+import showAPI from "@/api/apiShows";
 import { getToken, makeOptions, loggedIn } from "./util.api";
 
 
@@ -21,9 +22,7 @@ function logout() {
 };
 
 const API = {
-  // business: businessAPI,
-  // scout: scoutAPI,
-  // spot: fSpotAPI,
+  show: showAPI,
   festival: festivalAPI,
   account: accountAPI,
   helpers: {

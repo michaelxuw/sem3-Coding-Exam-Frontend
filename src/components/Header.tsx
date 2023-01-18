@@ -16,9 +16,10 @@ function Header({ setErrorMsg }: HeaderProps) {
 
 	return (
 		<nav className="w-full flex bg-gray-600 h-[50px] gap-2">
-			<NavItem route={"/"} icon={"home"} label={"Home"} end />
-			<NavItem permissionRequired={"ADMIN"} route={"/adminFestivals"} icon={"star"} label={"Festivals"} />
-			<NavItem permissionRequired={"USER"} route={"/guestFestivals"} icon={"star"} label={"Festivals"} />
+			<NavItem route={"/sem3-coding-exam-frontend/"} icon={"home"} label={"Home"} end />
+			<NavItem permissionRequired={"ADMIN"} route={"/sem3-coding-exam-frontend/adminFestivals"} icon={"star"} label={"Festivals"} />
+			<NavItem permissionRequired={"USER"} route={"/sem3-coding-exam-frontend/guestFestivals"} icon={"star"} label={"Festivals"} />
+			<NavItem permissionRequired={"USER"} route={"/sem3-coding-exam-frontend/guestShows"} icon={"star"} label={"Shows"} />
 
 
 			<div className="ml-auto flex items-center justify-center">
