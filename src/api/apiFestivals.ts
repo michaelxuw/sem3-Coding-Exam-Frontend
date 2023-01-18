@@ -35,7 +35,10 @@ function getFestivalAPI() {
   const fetchRelevantFestivals = async () => {
     try {
       const options = makeOptions("GET", true);
+      console.log("before fetch")
       const res = await fetch(`${base_endpoint}/getRelevant`, options);
+      console.log("after fetch")
+      console.log(res)
       const data = await handleHttpErrors(res);
       return data as newFestival[];
     } catch (error: any) {
