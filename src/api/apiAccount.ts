@@ -7,7 +7,7 @@ function getAccountAPI() {
 
   const createAccount = async ({ ...props }: Omit<NewAccount, "confirmPassword">) => {
     const options = makeOptions("POST", true, { ...props });
-    const res = await fetch(`${BASE_API_URL}/user`, options);
+    const res = await fetch(`${BASE_API_URL}/login/new`, options);
     const data = await handleHttpErrors(res);
     return data;
   };

@@ -23,12 +23,9 @@ function App() {
 				<Route path="/sem3-coding-exam-frontend/adminFestivals" element={<GuardedRoute permissionRequired={"ADMIN"} />}>
 					<Route index element={<AdminFestivals />} />
 				</Route>
-				<Route path="/sem3-coding-exam-frontend/guestFestivals" element={<GuestFestivals />}>
+				<Route path="/sem3-coding-exam-frontend/guestFestivals" element={<GuardedRoute permissionRequired={"USER"} />}>
 					<Route index element={<GuestFestivals />} />
 				</Route>
-				{/*<Route path="/sem3-coding-exam-frontend/guestFestivals" element={<GuardedRoute permissionRequired={"USER"} />}>*/}
-				{/*	<Route index element={<GuestFestivals />} />*/}
-				{/*</Route>*/}
 				<Route path="/sem3-coding-exam-frontend/guestShows" element={<GuardedRoute permissionRequired={"USER"} />}>
 					<Route index element={<GuestShows />} />
 				</Route>

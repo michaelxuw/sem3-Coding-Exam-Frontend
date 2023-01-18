@@ -18,7 +18,7 @@ function Header({ setErrorMsg }: HeaderProps) {
 		<nav className="w-full flex bg-gray-600 h-[50px] gap-2">
 			<NavItem route={"/sem3-coding-exam-frontend/"} icon={"home"} label={"Home"} end />
 			<NavItem permissionRequired={"ADMIN"} route={"/sem3-coding-exam-frontend/adminFestivals"} icon={"star"} label={"Festivals"} />
-			<NavItem route={"/sem3-coding-exam-frontend/guestFestivals"} icon={"star"} label={"Festivals"} />
+			<NavItem permissionRequired={"USER"} route={"/sem3-coding-exam-frontend/guestFestivals"} icon={"star"} label={"Festivals"} />
 			<NavItem permissionRequired={"USER"} route={"/sem3-coding-exam-frontend/guestShows"} icon={"star"} label={"Shows"} />
 
 

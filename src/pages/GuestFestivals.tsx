@@ -7,6 +7,7 @@ function GuestFestivals() {
 
 	const load = async () => {
 		const data = await API.festival.fetchRelevantFestivals();
+		console.log(data)
 		setFestivals(data);
 	};
 	useEffect(() => {
